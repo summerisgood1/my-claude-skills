@@ -55,6 +55,25 @@ prototype state is welded to the prototype and has to be rewritten later.
 A shim returns the **same shape as the real module** so the components consuming
 it need no changes.
 
+## The control bar
+
+Every switchable value is driven from one bar pinned to the top of the prototype.
+It is a tool, not part of the design, and four things follow from that:
+
+- **It must look unlike the app.** Light background, a colour per control group,
+  a hard border against the app below. Nobody should ever mistake it for a
+  screen. Do not style it to fit in.
+- **Two tiers of controls.** Global facts (signed in or out, account-level
+  numbers, held or empty) are always present. Feature-specific knobs appear only
+  for the feature being worked on, selected by a query param — the app itself
+  has no notion of features; only the bar does.
+- **It carries navigation and a reset.** A route switcher and a button that
+  restores the default state, so a broken demo is one click from recoverable.
+- **It is sticky, so it must publish its height.** Measure it and write the value
+  to a CSS variable that the app's own `sticky top-0` elements offset against.
+  Otherwise copied components stick underneath it — and fixing that by editing
+  them is exactly the forbidden edit.
+
 ## Where does this fake value go?
 
 Take the first rung that holds:
